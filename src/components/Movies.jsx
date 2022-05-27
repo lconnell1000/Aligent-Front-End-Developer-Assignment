@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-width: 100%
+width: 35%;
 height: 20vh;
 display: flex;
 flex-direction: column;
@@ -13,14 +13,18 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
+&:hover{
+    background-color: #CFCECE;
+}
 `
 const ImgContainer = styled.div`
-    height: 50%;
+    height: 150px;
+    width:
     flex: 1;
-    padding-top: 9%;
+    padding: 5px;
 `
 const Image = styled.img`
-    height: 20%;
+    height: 100%;
 `
 const Title = styled.h1`
     font-size: 16px;
