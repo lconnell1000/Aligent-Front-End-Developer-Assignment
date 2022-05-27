@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import Movies from "./components/Movies";
 
 const App = () => {
@@ -37,8 +39,10 @@ const App = () => {
     },
   ]);
   return (
-  <div>
+  <div className='container-fluid'>
+    <container className="column">
     <Movies movies={movies} />
+    </container>
   </div>
   );
 };
