@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from 'styled-components';
+import { Slider } from '@mui/material';
+
+
 
 const Container = styled.div`
     height: 100px;
@@ -34,13 +37,41 @@ const Input = styled.input`
     width: 300px;
     font-size: 20px;
 `
-const Right = styled.div`
+const Center = styled.div`
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+`
+const Title = styled.h3`
+    font-size: 14px;
+    align-content: flex-start;
+    justify-content: flex-start;
+    color: white;
+    padding: 0px 15px;
+`
+
+const Right = styled.div`
+    flex: 1;
     justify-content: flex-end;
 `
+const SliderWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    color: white;
+`
+const Value = styled.div`
+    padding: 0px 15px;
+`
+
+
 const Navbar = () => {
+    const [value, setValue] = useState([1950,2021]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue)
+    };
   return (
     <Container>
         <Wrapper>
@@ -50,9 +81,40 @@ const Navbar = () => {
                         <Input placeholder="Search" />
                 </SearchContainer>
             </Left>
-            <Right>
-                hello
-            </Right>
+            <Center>
+            
+            <Title>
+                    Year
+            </Title>
+          
+                <SliderWrapper>
+                <Value>
+                {value[0]}
+                </Value>
+            <Slider
+  getAriaLabel={() => 'Year range'}
+  value={value}
+  onChange={handleChange}
+  valueLabelDisplay="auto"
+  min={1950}
+  max={2021}
+  sx={{
+    width: 250,
+    color: '#bdbdbd',
+  }}
+/>
+<Value>
+{value[1]}
+</Value>
+</SliderWrapper>
+</Center>
+<Right>
+<Title>
+Type
+</Title>
+
+</Right>
+            
         </Wrapper>
 
     </Container>
