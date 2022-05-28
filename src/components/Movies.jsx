@@ -13,6 +13,10 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
+border-style: solid;
+border-color: grey;
+border-width: 1px;
+border-left-style: none;
 &:hover{
     background-color: #CFCECE;
 }
@@ -21,19 +25,21 @@ const ImgContainer = styled.div`
     height: 150px;
     width:
     flex: 1;
-    padding: 5px;
+    padding: 20px 10px;
 `
 const Image = styled.img`
     height: 100%;
 `
 const Title = styled.h1`
     font-size: 16px;
+    font-weight: 400;
 `
 const InfoContainer = styled.div`
     flex: 1;
 `
 const Year = styled.h3`
     font-size: 12px;
+    font-weight: 200;
 `
 const Movies = (props) => {
   return (
