@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 width: 35%;
-height: 20vh;
+height: 100vh;
 display: flex;
 flex-direction: column;
-
+overflow: scroll;
 `
 const Wrapper = styled.div`
 display: flex;

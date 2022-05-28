@@ -2,6 +2,8 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import Movies from "./components/Movies";
+import Navbar from "./components/Navbar";
+
 
 const App = () => {
   const [movies, setMovies] = useState([
@@ -71,10 +73,9 @@ const App = () => {
     },
   ]);
   return (
-  <div className='container-fluid'>
-    <container className="column">
-    <Movies movies={movies} />
-    </container>
+  <div>
+    <Navbar />
+    <Movies movies={movies} className="column"/>
   </div>
   );
 };
