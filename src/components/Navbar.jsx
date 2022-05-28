@@ -1,124 +1,140 @@
-import React, { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import styled from 'styled-components';
-import { Slider } from '@mui/material';
-
-
+import React, { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import styled from "styled-components";
+import { Slider } from "@mui/material";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Container = styled.div`
-    height: 100px;
-    background-color: grey;
-`
+  height: 100px;
+  background-color: grey;
+`;
 
 const Wrapper = styled.div`
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const Left = styled.div`
-    flex: 1;
-    display: flex;
-    align-items: center;
-`
+  flex: 1;
+  display: flex;
+  align-items: center;
+`;
 
 const SearchContainer = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    border: none;
-`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: none;
+`;
 const Input = styled.input`
-    border: none;
-    padding: 10px;
-    background-color: grey;
-    color: white;
-    width: 300px;
-    font-size: 20px;
-`
+  border: none;
+  padding: 10px;
+  background-color: grey;
+  color: white;
+  width: 300px;
+  font-size: 20px;
+`;
 const Center = styled.div`
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-`
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+`;
 const Title = styled.h3`
-    font-size: 14px;
-    align-content: flex-start;
-    justify-content: flex-start;
-    color: white;
-    padding: 0px 15px;
-`
+  font-size: 14px;
+  color: white;
+  padding: 0px 15px;
+`;
 
 const Right = styled.div`
-    flex: 1;
-    justify-content: flex-end;
-`
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+`;
 const SliderWrapper = styled.div`
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  color: white;
+`;
+const Value = styled.div`
+  padding: 0px 15px;
+`;
+
+const RadioWrapper = styled.div`
+    display: flex:
     flex-direction: row;
     color: white;
-`
-const Value = styled.div`
     padding: 0px 15px;
-`
-
+`;
 
 const Navbar = () => {
-    const [value, setValue] = useState([1950,2021]);
+  const [value, setValue] = useState([1950, 2021]);
+  const [radioValue, setRadioValue] = useState("");
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue)
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <Container>
-        <Wrapper>
-            <Left>
-                <SearchContainer>
-                        <SearchIcon style={{color:"white"}}/>
-                        <Input placeholder="Search" />
-                </SearchContainer>
-            </Left>
-            <Center>
-            
-            <Title>
-                    Year
-            </Title>
-          
-                <SliderWrapper>
-                <Value>
-                {value[0]}
-                </Value>
+      <Wrapper>
+        <Left>
+          <SearchContainer>
+            <SearchIcon style={{ color: "white" }} />
+            <Input placeholder="Search" />
+          </SearchContainer>
+        </Left>
+        <Center>
+          <Title>Year</Title>
+          <SliderWrapper>
+            <Value>{value[0]}</Value>
             <Slider
-  getAriaLabel={() => 'Year range'}
-  value={value}
-  onChange={handleChange}
-  valueLabelDisplay="auto"
-  min={1950}
-  max={2021}
-  sx={{
-    width: 250,
-    color: '#bdbdbd',
-  }}
-/>
-<Value>
-{value[1]}
-</Value>
-</SliderWrapper>
-</Center>
-<Right>
-<Title>
-Type
-</Title>
-
-</Right>
-            
-        </Wrapper>
-
+              getAriaLabel={() => "Year range"}
+              value={value}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
+              min={1950}
+              max={2021}
+              sx={{
+                width: 250,
+                color: "#bdbdbd",
+              }}
+            />
+            <Value>{value[1]}</Value>
+          </SliderWrapper>
+        </Center>
+        <Right>
+          <Title>Type</Title>
+          <RadioWrapper>
+            <RadioGroup value={radioValue} row onChange={setRadioValue}>
+              <FormControlLabel value="Any" control={<Radio />} label="Any" />
+              <FormControlLabel
+                value="Movies"
+                control={<Radio />}
+                label="Movies"
+              />
+              <FormControlLabel
+                value="Series"
+                control={<Radio />}
+                label="Series"
+              />
+              <FormControlLabel
+                value="Episodes"
+                control={<Radio />}
+                label="Episodes"
+              />
+            </RadioGroup>
+          </RadioWrapper>
+        </Right>
+      </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
