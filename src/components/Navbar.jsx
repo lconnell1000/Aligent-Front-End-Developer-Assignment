@@ -74,7 +74,7 @@ const RadioWrapper = styled.div`
     padding: 0px 15px;
 `;
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [value, setValue] = useState([1950, 2021]);
   const [radioValue, setRadioValue] = useState("");
 
@@ -87,7 +87,9 @@ const Navbar = () => {
         <Left>
           <SearchContainer>
             <SearchIcon style={{ color: "white" }} />
-            <Input placeholder="Search" />
+            <Input value={props.searchValue}
+             onChange={(event) => props.setSearchValue(event.target.value)}
+             placeholder="Search" />
           </SearchContainer>
         </Left>
         <Center>

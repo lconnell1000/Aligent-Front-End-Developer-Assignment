@@ -22,7 +22,7 @@ border-left-style: none;
 }
 `
 const ImgContainer = styled.div`
-    height: 150px;
+    height: 135px;
     width:
     flex: 1;
     padding: 20px 10px;
@@ -41,9 +41,22 @@ const Year = styled.h3`
     font-size: 12px;
     font-weight: 200;
 `
+const ResultsContainer = styled.div`
+display: flex;
+height: 135 px;
+font-weight: 300;
+flex-direction: row;
+align-items: center;
+justify-content: flex-start;
+padding: 20px 10px;
+`
 const Movies = (props) => {
   return (
+      
     <Container className="text-right">
+        <ResultsContainer>
+            {props.totalResults} Results
+        </ResultsContainer>
         {props.movies.map((movie, index) =>
         <div>
             <Wrapper>
