@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Movie from "./Movie";
 
 const Container = styled.div`
 display: flex;
@@ -53,7 +52,7 @@ padding: 20px 10px;
 `
 
 const ContainerRight = styled.div`
-width: 35%;
+width: 65%;
 height: 100vh;
 display: flex;
 flex-direction: column;
@@ -63,10 +62,12 @@ const ImageRight = styled.img`
 `
 
 const ImgContainerRight = styled.div`
-    height: 600px;
-    padding: 20px 10px;
+    height: 350px;
+    padding: 25px 15px;
 `
+const TitleRight = styled.div`
 
+`
 
 const Movies = (props) => {
     const [movie, setMovie ] = useState({});
@@ -101,6 +102,7 @@ const Movies = (props) => {
     <ContainerRight>
         <ImgContainerRight>
         <ImageRight src={movie.Poster} />
+        <TitleRight>{movie.Title}</TitleRight>
         </ImgContainerRight>
     </ContainerRight>
     </Container>

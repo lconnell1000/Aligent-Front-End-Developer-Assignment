@@ -35,6 +35,7 @@ const App = () => {
       // console.log("Allmovies", allMovies);
     }
     // console.log("allMovies, ", allMovies.length);
+    
     const filteredMovies = allMovies.filter(
       (element) => element.Year > yearValue[0] && element.Year < yearValue[1]
     );
@@ -50,14 +51,20 @@ const App = () => {
       setTotalResults("0");
     }
   };
+  
+  const onSearch = () => {
+   
+    getMovieRequest(searchValue, radioValue, yearValue);
+  };
 
   useEffect(() => {
     getMovieRequest(searchValue, radioValue, yearValue);
-  }, [searchValue, radioValue, yearValue]);
+  }, [ radioValue, yearValue]);
 
   return (
     <div>
       <Navbar
+        onSearch={onSearch}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         radioValue={radioValue}

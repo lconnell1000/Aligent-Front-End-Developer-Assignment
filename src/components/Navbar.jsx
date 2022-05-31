@@ -88,13 +88,14 @@ const Navbar = (props) => {
     //console.log("radio value: ", selectedValue);
   };
 
+
  
   return (
     <Container>
       <Wrapper>
         <Left>
           <SearchContainer>
-            <SearchIcon style={{ color: "white" }} />
+            <SearchIcon onClick={() => props.onSearch()} style={{ color: "white" }} />
             <Input
               value={props.searchValue}
               onChange={(event) => props.setSearchValue(event.target.value)}
