@@ -47,6 +47,13 @@ justify-content: flex-start;
 padding: 20px 10px;
 `
 const Movies = (props) => {
+    const handleClick = async(movie) => {
+        const url = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=31e98962`
+
+        const response = await fetch(url)
+        const responseJson = await response.json();
+        console.log(responseJson);
+    }
   return (
 
     <Container>
@@ -55,7 +62,7 @@ const Movies = (props) => {
         </ResultsContainer>
         {props.movies.map((movie, index) =>
         <div key={index}>
-            <Wrapper>
+            <Wrapper onClick= {handleClick}>
             <ImgContainer>
             <Image src={movie.Poster}/>
             </ImgContainer>

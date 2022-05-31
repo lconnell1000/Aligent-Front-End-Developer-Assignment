@@ -76,6 +76,8 @@ const RadioWrapper = styled.div`
     padding: 0px 15px;
 `;
 
+
+
 const Navbar = (props) => {
   const handleChange = (event, newValue) => {
     props.setYearValue(newValue);
@@ -86,6 +88,7 @@ const Navbar = (props) => {
     //console.log("radio value: ", selectedValue);
   };
 
+ 
   return (
     <Container>
       <Wrapper>
