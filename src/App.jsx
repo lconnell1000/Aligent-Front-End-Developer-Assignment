@@ -10,25 +10,40 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('');
   const [ totalResults, setTotalResults ]= useState("");
   const [ radioValue, setRadioValue ]= useState('Any');
-  const [yearValue, setYearValue] = useState([1930, 2021]);
+  const [yearValue, setYearValue] = useState([1970, 1985]);
   
 
   const getMovieRequest = async (searchValue, radioValue) => {
     const typeString = (radioValue !== 'Any') ? "&type="+radioValue : "";
-    //for (y=yearValue[0]; y<=yearValue[1]; y++)
-    const url =  `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=dce48647`;
-    console.log(url);
+
+    const url =  `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=31e98962
+`;
+    //console.log(url);
     const response = await fetch(url);
+    
     
     // filteredResponse = response.filter(response => response)
     const responseJson = await response.json();
-    const filteredResponse = responseJson.Search.filter(element => element.Year > yearValue[0] && element.Year < yearValue[1]);
-    console.log("filtered respone ", filteredResponse);
+    const pages = Math.ceil((responseJson.totalResults)/10)
+    let allMovies = [];
+    console.log("pages", pages)
 
-    if (responseJson.Search) {
+
+    for (let i=1; i<=pages; i++) {
+      const responses = await fetch(`http://www.omdbapi.com/?s=${searchValue}${typeString}&page=${i}&apikey=31e98962`)
+      const responsesJson = await responses.json();
+      // console.log("responsesJson.search", responsesJson.Search)
+      allMovies = allMovies.concat(responsesJson.Search);
+      // console.log("Allmovies", allMovies);
+    }
+    // console.log("allMovies, ", allMovies.length);
+    const filteredMovies = allMovies.filter(element => element.Year > yearValue[0] && element.Year < yearValue[1]);
+    console.log("filtered Movies ", filteredMovies);
+
+    if (allMovies) {
       
-      setMovies(filteredResponse);
-      setTotalResults(filteredResponse.length);
+      setMovies(filteredMovies);
+      setTotalResults(filteredMovies.length);
     }
     else {
       setMovies([])
@@ -39,6 +54,7 @@ const App = () => {
   useEffect(() => {
     getMovieRequest(searchValue, radioValue, yearValue);
   }, [searchValue, radioValue, yearValue]);
+
 
   return (
   <div>

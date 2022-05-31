@@ -54,7 +54,7 @@ const Movies = (props) => {
             {props.totalResults} Results
         </ResultsContainer>
         {props.movies.map((movie, index) =>
-        <div key={movie.imdbID}>
+        <div key={index}>
             <Wrapper>
             <ImgContainer>
             <Image src={movie.Poster}/>
