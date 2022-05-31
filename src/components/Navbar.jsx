@@ -86,7 +86,7 @@ const Navbar = (props) => {
 
   const handleRadioChange = (event, selectedValue) => {
   props.setRadioValue(selectedValue);
-      console.log("radio value: ", selectedValue);
+      //console.log("radio value: ", selectedValue);
   }
   
   return (
