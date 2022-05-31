@@ -53,10 +53,10 @@ const ResultsContainer = styled.div`
 
 const ContainerTopRight = styled.div`
   width: 100%;
-  height: 50vh;
   display: flex;
   flex-direction: column;
-  border-bottom: 0.5px solid grey;
+  border-bottom: 1px solid grey;
+  padding: 20px 0px
 `;
 const ImageRight = styled.img`
   height: 100%;
@@ -110,24 +110,32 @@ const ContainerRight = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
-  padding: 20px 0px;
+  padding: 0px 20px;
 `
 
 const ContainerMiddleRight = styled.div`
   font-weight: 250;
   font-size: 20px;
-  border-bottom: 0.5px solid grey;
-  height: 20vh;
+  border-bottom: 1px solid grey;
+  padding: 20px 10px;
 `
 const ContainerBottomRight = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 40px;
+  
 `
 
 const RatingsContainer = styled.div`
-  padding: 10px 10px;
+padding: 0px 20px;
+border-right: 1px solid grey;
+  
 `
+// const RatingsContainer:last-child = styled.div`
+
+// `
 const Movies = (props) => {
   const [movie, setMovie] = useState({});
 
@@ -163,6 +171,7 @@ const Movies = (props) => {
           <ContainerTopRight>
             <ImgContainerRight>
               <ImageRight src={movie.Poster} />
+              </ImgContainerRight>
               <MovieDetailsWrapper>
                 <TitleRight>{movie.Title}</TitleRight>
                 <MovieDetails>
@@ -175,7 +184,7 @@ const Movies = (props) => {
                 {movie.Actors}
                 </MovieActors>
               </MovieDetailsWrapper>
-            </ImgContainerRight>
+            
           </ContainerTopRight>
           <ContainerMiddleRight>
               {movie.Plot}
