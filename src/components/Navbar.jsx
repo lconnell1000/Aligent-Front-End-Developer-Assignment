@@ -126,7 +126,7 @@ const Navbar = (props) => {
           <RadioWrapper>
             <FormControl>
               <RadioGroup
-                selectedValue={props.radioValue}
+                value={props.radioValue}
                 onChange={handleRadioChange}
                 row
               >

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Movie from "./Movie";
 
 const Container = styled.div`
+display: flex;
+`
+const ContainerLeft = styled.div`
 width: 35%;
 height: 100vh;
 display: flex;
@@ -15,6 +19,7 @@ flex-direction: row;
 align-items: center;
 justify-content: center;
 border-bottom: 1px solid grey;
+cursor: pointer;
 &:hover{
     background-color: #CFCECE;
 }
@@ -46,23 +51,43 @@ align-items: center;
 justify-content: flex-start;
 padding: 20px 10px;
 `
-const Movies = (props) => {
-    const handleClick = async(movie) => {
-        const url = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=31e98962`
 
-        const response = await fetch(url)
+const ContainerRight = styled.div`
+width: 35%;
+height: 100vh;
+display: flex;
+flex-direction: column;
+`
+const ImageRight = styled.img`
+    height: 100%
+`
+
+const ImgContainerRight = styled.div`
+    height: 600px;
+    padding: 20px 10px;
+`
+
+
+const Movies = (props) => {
+    const [movie, setMovie ] = useState({});
+
+    const handleClick = async (id) => {
+        const url = `http://www.omdbapi.com/?i=${id}&apikey=31e98962`;
+        const response = await fetch(url);
         const responseJson = await response.json();
         console.log(responseJson);
+        setMovie(responseJson);
     }
-  return (
 
+  return (
     <Container>
+    <ContainerLeft>
         <ResultsContainer>
             {props.totalResults} Results
         </ResultsContainer>
         {props.movies.map((movie, index) =>
         <div key={index}>
-            <Wrapper onClick= {handleClick}>
+            <Wrapper onClick= {() => handleClick(movie.imdbID)}>
             <ImgContainer>
             <Image src={movie.Poster}/>
             </ImgContainer>
@@ -71,8 +96,16 @@ const Movies = (props) => {
             <Year>{movie.Year}</Year>
             </InfoContainer>
             </Wrapper>
-        </div>)}
+        </div>)}  
+    </ContainerLeft>
+    <ContainerRight>
+        <ImgContainerRight>
+        <ImageRight src={movie.Poster} />
+        </ImgContainerRight>
+    </ContainerRight>
     </Container>
+    
+    
   )
 }
 

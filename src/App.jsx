@@ -23,7 +23,7 @@ const App = () => {
     const responseJson = await response.json();
     const pages = Math.ceil(responseJson.totalResults / 10);
     let allMovies = [];
-    console.log("pages", pages);
+    //console.log("pages", pages);
 
     for (let i = 1; i <= pages; i++) {
       const responses = await fetch(
