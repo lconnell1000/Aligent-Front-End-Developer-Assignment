@@ -9,28 +9,35 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [ totalResults, setTotalResults ]= useState("")
+  const [ radioValue, setRadioValue ]= useState('Any')
+  
 
   const getMovieRequest = async (searchValue, radioValue) => {
-    const url =  `http://www.omdbapi.com/?s=${searchValue}&apikey=dce48647`
-    
+    const typeString = (radioValue !== 'Any') ? "&type="+radioValue : "";
+    const url =  `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=dce48647`;
+   // console.log(url);
     const response = await fetch(url);
     const responseJson = await response.json();
     console.log(responseJson);
 
     if (responseJson.Search) {
+
       setMovies(responseJson.Search)
       setTotalResults(responseJson.totalResults)
     }
-    
+    else {
+      setMovies([])
+      setTotalResults("0")
+    }
   };
 
   useEffect(() => {
-    getMovieRequest(searchValue);
-  }, [searchValue]);
+    getMovieRequest(searchValue, radioValue);
+  }, [searchValue, radioValue]);
 
   return (
   <div>
-    <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
+    <Navbar searchValue={searchValue} setSearchValue={setSearchValue} radioValue={radioValue} setRadioValue={setRadioValue}/>
     <Movies totalResults={totalResults} setTotalResults={setTotalResults} movies={movies} className="column"/>
   </div>
   );

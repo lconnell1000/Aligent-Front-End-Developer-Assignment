@@ -4,6 +4,6 @@ body {
 }
 
 .MuiSvgIcon-root {
-    border-color: white !important;
-    color: white !important;
+    border-color: white;
+    color: white;
 }

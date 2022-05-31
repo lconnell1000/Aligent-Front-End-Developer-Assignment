@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
-import { FormLabel, Slider } from "@mui/material";
+import { Slider } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -79,12 +79,15 @@ const RadioWrapper = styled.div`
 
 const Navbar = (props) => {
   const [value, setValue] = useState([1950, 2021]);
-  const [radioValue, setRadioValue] = useState("Any");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleRadioChange = (event, selectedValue) => {
+  props.setRadioValue(selectedValue);
+      console.log("radio value: ", selectedValue);
+  }
   
   return (
     <Container>
@@ -120,7 +123,7 @@ const Navbar = (props) => {
           <Title>Type</Title>
           <RadioWrapper>
               <FormControl>
-            <RadioGroup name="type" selectedValue={`props.${radioValue}`} onChange={`props.${setRadioValue}`} row>
+            <RadioGroup selectedValue={props.radioValue} onChange={handleRadioChange} row>
               <FormControlLabel 
               value="Any" 
               control={<Radio />} 
