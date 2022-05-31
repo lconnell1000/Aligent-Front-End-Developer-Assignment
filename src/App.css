@@ -2,3 +2,8 @@ body {
     background: white;
     color: black;
 }
+
+.MuiSvgIcon-root {
+    border-color: white !important;
+    color: white !important;
+}

@@ -7,24 +7,20 @@ height: 100vh;
 display: flex;
 flex-direction: column;
 overflow: scroll;
+border-right: 1px solid grey;
 `
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
-border-style: solid;
-border-color: grey;
-border-width: 1px;
-border-left-style: none;
+border-bottom: 1px solid grey;
 &:hover{
     background-color: #CFCECE;
 }
 `
 const ImgContainer = styled.div`
     height: 135px;
-    width:
-    flex: 1;
     padding: 20px 10px;
 `
 const Image = styled.img`
@@ -44,7 +40,7 @@ const Year = styled.h3`
 const ResultsContainer = styled.div`
 display: flex;
 height: 135 px;
-font-weight: 300;
+font-weight: 400;
 flex-direction: row;
 align-items: center;
 justify-content: flex-start;
@@ -52,13 +48,13 @@ padding: 20px 10px;
 `
 const Movies = (props) => {
   return (
-      
-    <Container className="text-right">
+
+    <Container>
         <ResultsContainer>
             {props.totalResults} Results
         </ResultsContainer>
         {props.movies.map((movie, index) =>
-        <div>
+        <div key={movie.imdbID}>
             <Wrapper>
             <ImgContainer>
             <Image src={movie.Poster}/>

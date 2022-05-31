@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
-import { Slider } from "@mui/material";
+import { FormLabel, Slider } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from '@mui/material/FormControl';
+import { laptop } from "../responsive";
 
 const Container = styled.div`
-  height: 100px;
+  padding: 20px 10px;
   background-color: grey;
 `;
 
@@ -16,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${laptop({ display: "block"})}
 `;
 
 const Left = styled.div`
@@ -76,11 +79,13 @@ const RadioWrapper = styled.div`
 
 const Navbar = (props) => {
   const [value, setValue] = useState([1950, 2021]);
-  const [radioValue, setRadioValue] = useState("");
+  const [radioValue, setRadioValue] = useState("Any");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
   return (
     <Container>
       <Wrapper>
@@ -114,24 +119,29 @@ const Navbar = (props) => {
         <Right>
           <Title>Type</Title>
           <RadioWrapper>
-            <RadioGroup value={radioValue} row onChange={setRadioValue}>
-              <FormControlLabel value="Any" control={<Radio />} label="Any" />
+              <FormControl>
+            <RadioGroup name="type" selectedValue={`props.${radioValue}`} onChange={`props.${setRadioValue}`} row>
+              <FormControlLabel 
+              value="Any" 
+              control={<Radio />} 
+              label="Any" />
               <FormControlLabel
-                value="Movies"
+                value="movie"
                 control={<Radio />}
                 label="Movies"
               />
               <FormControlLabel
-                value="Series"
+                value="series"
                 control={<Radio />}
                 label="Series"
               />
               <FormControlLabel
-                value="Episodes"
+                value="episode"
                 control={<Radio />}
                 label="Episodes"
               />
             </RadioGroup>
+            </FormControl>
           </RadioWrapper>
         </Right>
       </Wrapper>
