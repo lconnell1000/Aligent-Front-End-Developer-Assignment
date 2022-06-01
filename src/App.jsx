@@ -14,34 +14,30 @@ const App = () => {
   const getMovieRequest = async (searchValue, radioValue) => {
     const typeString = radioValue !== "Any" ? "&type=" + radioValue : "";
 
-    const url = `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=31e98962
-`;
-    //console.log(url);
+    const url = `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=31e98962`;
+
     const response = await fetch(url);
 
-    // filteredResponse = response.filter(response => response)
     const responseJson = await response.json();
+    //figure out the total number of pages that the search has
     const pages = Math.ceil(responseJson.totalResults / 10);
     let allMovies = [];
-    //console.log("pages", pages);
-
+    //then create an allMovies array that contains the results form all pages
     for (let i = 1; i <= pages; i++) {
       const responses = await fetch(
         `http://www.omdbapi.com/?s=${searchValue}${typeString}&page=${i}&apikey=31e98962`
       );
       const responsesJson = await responses.json();
-      // console.log("responsesJson.search", responsesJson.Search)
+
       allMovies = allMovies.concat(responsesJson.Search);
-      // console.log("Allmovies", allMovies);
     }
-    // console.log("allMovies, ", allMovies.length);
-    
+    //then filter the movies based on the year they were made
     const filteredMovies = allMovies.filter(
       (element) => element.Year > yearValue[0] && element.Year < yearValue[1]
     );
-    const totalMovies = filteredMovies.length
-    filteredMovies.splice(10);
-
+    const totalMovies = filteredMovies.length;
+    //only want 20 movies to render on page
+    filteredMovies.splice(20);
 
     if (allMovies) {
       setMovies(filteredMovies);
@@ -51,15 +47,17 @@ const App = () => {
       setTotalResults("0");
     }
   };
-  
+  //function for when the user clicks the search icon
   const onSearch = () => {
-   
     getMovieRequest(searchValue, radioValue, yearValue);
   };
 
+  //function for when the user changes any of the filters other than search
+  //had to have searchvalue seperate as the page made too many requests and 
+  //rendered even more slowly if i had search in the useEffect
   useEffect(() => {
     getMovieRequest(searchValue, radioValue, yearValue);
-  }, [ radioValue, yearValue]);
+  }, [radioValue, yearValue]);
 
   return (
     <div>
@@ -76,7 +74,6 @@ const App = () => {
         totalResults={totalResults}
         setTotalResults={setTotalResults}
         movies={movies}
-        className="column"
       />
     </div>
   );

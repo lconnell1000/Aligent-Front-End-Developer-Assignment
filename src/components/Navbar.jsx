@@ -10,6 +10,7 @@ import { laptop } from "../responsive";
 const Container = styled.div`
   padding: 20px 10px;
   background-color: grey;
+  height: 15vh;
 `;
 
 const Wrapper = styled.div`
@@ -76,8 +77,6 @@ const RadioWrapper = styled.div`
     padding: 0px 15px;
 `;
 
-
-
 const Navbar = (props) => {
   const handleChange = (event, newValue) => {
     props.setYearValue(newValue);
@@ -85,17 +84,17 @@ const Navbar = (props) => {
 
   const handleRadioChange = (event, selectedValue) => {
     props.setRadioValue(selectedValue);
-    //console.log("radio value: ", selectedValue);
   };
 
-
- 
   return (
     <Container>
       <Wrapper>
         <Left>
           <SearchContainer>
-            <SearchIcon onClick={() => props.onSearch()} style={{ color: "white" }} />
+            <SearchIcon
+              onClick={() => props.onSearch()}
+              style={{ color: "white" }}
+            />
             <Input
               value={props.searchValue}
               onChange={(event) => props.setSearchValue(event.target.value)}
@@ -104,7 +103,7 @@ const Navbar = (props) => {
           </SearchContainer>
         </Left>
         <Center>
-          <Title>Year</Title>
+          <Title>YEAR</Title>
           <SliderWrapper>
             <Value>{props.yearValue[0]}</Value>
             <Slider
@@ -123,7 +122,7 @@ const Navbar = (props) => {
           </SliderWrapper>
         </Center>
         <Right>
-          <Title>Type</Title>
+          <Title>TYPE</Title>
           <RadioWrapper>
             <FormControl>
               <RadioGroup
@@ -131,11 +130,7 @@ const Navbar = (props) => {
                 onChange={handleRadioChange}
                 row
               >
-                <FormControlLabel 
-                  value="Any" 
-                  control={<Radio />} 
-                  label="Any" 
-                />
+                <FormControlLabel value="Any" control={<Radio />} label="Any" />
                 <FormControlLabel
                   value="movie"
                   control={<Radio />}

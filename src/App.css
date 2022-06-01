@@ -7,3 +7,11 @@ body {
     border-color: white;
     color: white;
 }
+
+.sc-hHLeRK {
+    border-right: 0.5px grey solid
+}
+
+.sc-hHLeRK:last-child {
+    border-right: none;
+}

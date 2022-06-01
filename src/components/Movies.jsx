@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
 `;
 const ContainerLeft = styled.div`
   width: 40%;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -54,9 +55,11 @@ const ResultsContainer = styled.div`
 const ContainerTopRight = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-end;
   border-bottom: 1px solid grey;
-  padding: 20px 0px
+  padding: 20px 0px;
+  ${mobile({ "flex-direction": "column" })}
 `;
 const ImageRight = styled.img`
   height: 100%;
@@ -67,24 +70,23 @@ const ImgContainerRight = styled.div`
   padding: 0px 15px;
   display: flex;
   align-items: center;
-  
+  ${mobile({ height: "200px" })}
 `;
 const MovieDetails = styled.div`
   display: flex;
   flex-direction: row;
-  font-weight: 300;
-  padding: 2.5px 0px;
+  font-weight: 250;
+  padding: 5px 0px;
 `;
 const TitleRight = styled.div`
   font-weight: 700;
   font-size: 30px;
-  padding: 2.5px 0px;
+  padding: 5px 0px;
 `;
 const MovieDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
-  
 `;
 const MovieRating = styled.div`
   border: 1px solid black;
@@ -100,42 +102,45 @@ const MovieYear = styled.div`
 `;
 const MovieRunTime = styled.div`
   padding: 5px;
-`
+`;
 
 const MovieActors = styled.div`
-padding: 2.5px 0px;
-font-weight: 300;
-`
+  padding: 5px 0px;
+  font-weight: 250;
+`;
 const ContainerRight = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
   padding: 0px 20px;
-`
+  ${mobile({ display: "block" })}
+`;
 
 const ContainerMiddleRight = styled.div`
   font-weight: 250;
   font-size: 20px;
   border-bottom: 1px solid grey;
   padding: 20px 10px;
-`
+`;
 const ContainerBottomRight = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   padding: 60px 40px;
-  
-`
+  ${mobile({ "flex-direction": "column" })}
+`;
 
 const RatingsContainer = styled.div`
-padding: 0px 20px;
-border-right: 1px solid grey;
-  
-`
-// const RatingsContainer:last-child = styled.div`
+  padding: 10px 75px;
+  border-right: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 250;
+`;
 
-// `
 const Movies = (props) => {
   const [movie, setMovie] = useState({});
 
@@ -167,40 +172,32 @@ const Movies = (props) => {
       </ContainerLeft>
       {Object.keys(movie).length > 0 && (
         <ContainerRight>
-          
           <ContainerTopRight>
             <ImgContainerRight>
               <ImageRight src={movie.Poster} />
-              </ImgContainerRight>
-              <MovieDetailsWrapper>
-                <TitleRight>{movie.Title}</TitleRight>
-                <MovieDetails>
-                  <MovieRating>{movie.Rated}</MovieRating>
-                  <MovieYear>{movie.Year} ·</MovieYear>
-                  <MovieCategory>{movie.Genre} ·</MovieCategory>
-                  <MovieRunTime>{movie.Runtime}</MovieRunTime>
-                </MovieDetails>
-                <MovieActors>
-                {movie.Actors}
-                </MovieActors>
-              </MovieDetailsWrapper>
-            
+            </ImgContainerRight>
+            <MovieDetailsWrapper>
+              <TitleRight>{movie.Title}</TitleRight>
+              <MovieDetails>
+                <MovieRating>{movie.Rated}</MovieRating>
+                <MovieYear>{movie.Year} ·</MovieYear>
+                <MovieCategory>{movie.Genre} ·</MovieCategory>
+                <MovieRunTime>{movie.Runtime}</MovieRunTime>
+              </MovieDetails>
+              <MovieActors>{movie.Actors}</MovieActors>
+            </MovieDetailsWrapper>
           </ContainerTopRight>
-          <ContainerMiddleRight>
-              {movie.Plot}
-          </ContainerMiddleRight>
+          <ContainerMiddleRight>{movie.Plot}</ContainerMiddleRight>
           <ContainerBottomRight>
-              {movie.Ratings?.map(el => (
-                <RatingsContainer>
-                    <p>{el.Value}</p>
-                    {el.Source}
-                </RatingsContainer>
-              ))}
-              
+            {movie.Ratings?.map((el, index) => (
+              <RatingsContainer key={index} class="ratings">
+                <p>{el.Value}</p>
+                {el.Source}
+              </RatingsContainer>
+            ))}
           </ContainerBottomRight>
-          </ContainerRight>
+        </ContainerRight>
       )}
-      
     </Container>
   );
 };
