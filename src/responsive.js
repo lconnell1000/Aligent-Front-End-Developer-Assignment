@@ -10,7 +10,7 @@ export const laptop = (props) => {
 
 export const mobile = (props) => {
   return css`
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 425px) {
       ${props}
     }
   `;

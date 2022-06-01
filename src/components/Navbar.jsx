@@ -5,12 +5,14 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import { laptop } from "../responsive";
+import { laptop, mobile } from "../responsive";
 
 const Container = styled.div`
   padding: 20px 10px;
   background-color: grey;
   height: 15vh;
+  ${mobile({ height: "35vh" })}
+  ${laptop({ height: "30vh" })}
 `;
 
 const Wrapper = styled.div`
@@ -19,6 +21,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   ${laptop({ display: "block" })}
+
 `;
 
 const Left = styled.div`

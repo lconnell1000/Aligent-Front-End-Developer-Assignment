@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, laptop } from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +12,8 @@ const ContainerLeft = styled.div`
   flex-direction: column;
   overflow: scroll;
   border-right: 1px solid grey;
+  ${mobile({ height: "65vh" })}
+  ${laptop({ height: "70vh" })}
 `;
 const Wrapper = styled.div`
   display: flex;
