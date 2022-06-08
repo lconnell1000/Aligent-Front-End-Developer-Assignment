@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Movies from "./components/Movies";
 import Navbar from "./components/Navbar";
+import Watchlist from "./components/Watchlist";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -12,6 +13,7 @@ const App = () => {
   const [radioValue, setRadioValue] = useState("Any");
   const [yearValue, setYearValue] = useState([1930, 2021]);
   const [searching, setSearching] = useState(false);
+  const [watchlist, setWatchlist] = useState([]);
 
  
   const getMovieRequest = async (searchValue, radioValue) => {
@@ -73,7 +75,11 @@ const App = () => {
     filterMovies(allMovies);
   }, [radioValue, yearValue]);
 
-
+  const addWatchlistMovie = (movie) => {
+    console.log("TESTING", movie);
+    const newWatchlist = [...watchlist, movie]
+    setWatchlist(newWatchlist);
+  };
 
   return (
     <div>
@@ -92,6 +98,10 @@ const App = () => {
         totalResults={totalResults}
         setTotalResults={setTotalResults}
         movies={movies}
+        addWatchlistMovie={addWatchlistMovie}
+      />
+      <Watchlist
+      movies = {watchlist}
       />
     </div>
   );
