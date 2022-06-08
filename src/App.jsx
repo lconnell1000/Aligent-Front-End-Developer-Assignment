@@ -6,15 +6,17 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [totalResults, setTotalResults] = useState("");
   const [radioValue, setRadioValue] = useState("Any");
   const [yearValue, setYearValue] = useState([1930, 2021]);
+  const [searching, setSearching] = useState(false);
 
+ 
   const getMovieRequest = async (searchValue, radioValue) => {
-    const typeString = radioValue !== "Any" ? "&type=" + radioValue : "";
-
-    const url = `http://www.omdbapi.com/?s=${searchValue}${typeString}&apikey=31e98962`;
+    setSearching(true);
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=31e98962`;
 
     const response = await fetch(url);
 
@@ -25,21 +27,34 @@ const App = () => {
     //then create an allMovies array that contains the results form all pages
     for (let i = 1; i <= pages; i++) {
       const responses = await fetch(
-        `http://www.omdbapi.com/?s=${searchValue}${typeString}&page=${i}&apikey=31e98962`
+        `http://www.omdbapi.com/?s=${searchValue}&page=${i}&apikey=31e98962`
       );
       const responsesJson = await responses.json();
 
       allMovies = allMovies.concat(responsesJson.Search);
     }
+    setAllMovies(allMovies);
+    filterMovies(allMovies);
+    setSearching(false);
     //then filter the movies based on the year they were made
-    const filteredMovies = allMovies.filter(
+  
+  };
+
+  const filterMovies = (moviesToFilter) => {
+    let filteredMovies = moviesToFilter.filter(
       (element) => element.Year > yearValue[0] && element.Year < yearValue[1]
     );
+
+    if (radioValue !== 'Any') {
+      filteredMovies = filteredMovies.filter((element) =>
+        element.Type === radioValue
+      );
+    }
     const totalMovies = filteredMovies.length;
     //only want 20 movies to render on page
     filteredMovies.splice(20);
 
-    if (allMovies) {
+    if (moviesToFilter) {
       setMovies(filteredMovies);
       setTotalResults(totalMovies);
     } else {
@@ -53,11 +68,12 @@ const App = () => {
   };
 
   //function for when the user changes any of the filters other than search
-  //had to have searchvalue seperate as the page made too many requests and 
-  //rendered even more slowly if i had search in the useEffect
+ 
   useEffect(() => {
-    getMovieRequest(searchValue, radioValue, yearValue);
+    filterMovies(allMovies);
   }, [radioValue, yearValue]);
+
+
 
   return (
     <div>
@@ -69,6 +85,8 @@ const App = () => {
         setRadioValue={setRadioValue}
         yearValue={yearValue}
         setYearValue={setYearValue}
+        searching={searching}
+        setSearching={setSearching}
       />
       <Movies
         totalResults={totalResults}

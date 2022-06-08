@@ -2,10 +2,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
 import { Slider } from "@mui/material";
 import Radio from "@mui/material/Radio";
+
 import RadioGroup from "@mui/material/RadioGroup";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { laptop, mobile } from "../responsive";
+import classes from '../Backdrop.css';
 
 const Container = styled.div`
   padding: 20px 10px;
@@ -97,7 +101,17 @@ const Navbar = (props) => {
             <SearchIcon
               onClick={() => props.onSearch()}
               style={{ color: "white" }}
+              className="search"
             />
+            <Backdrop
+              className={classes.backdrop}
+              open={props.searching}
+              onClick={() => {
+                alert("Backdrop clicked");
+              }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
             <Input
               value={props.searchValue}
               onChange={(event) => props.setSearchValue(event.target.value)}

@@ -192,7 +192,7 @@ const Movies = (props) => {
           <ContainerMiddleRight>{movie.Plot}</ContainerMiddleRight>
           <ContainerBottomRight>
             {movie.Ratings?.map((el, index) => (
-              <RatingsContainer key={index} class="ratings">
+              <RatingsContainer key={index} className="ratings">
                 <p>{el.Value}</p>
                 {el.Source}
               </RatingsContainer>
