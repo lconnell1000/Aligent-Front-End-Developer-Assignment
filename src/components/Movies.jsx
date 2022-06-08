@@ -199,10 +199,10 @@ const Movies = (props) => {
               <ImageRight src={movie.Poster} />
             </ImgContainerRight>
             <MovieDetailsWrapper>
-              <WatchlistWrapper>
+              <WatchlistWrapper onClick={() => props.addWatchlistMovie(movie)}>
             <Watchlist>
             <BookmarkBorderIcon 
-            onClick={() => props.addWatchlistMovie(movie)}
+            
             style={{ color: "grey" }}
             />
             Watchlist

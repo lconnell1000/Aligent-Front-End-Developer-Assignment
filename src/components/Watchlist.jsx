@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+
 import styled from "styled-components";
-import { mobile, laptop } from "../responsive";
+
 
 const Container = styled.div`
   display: flex;
-  height: 20vh;
+  height: 30vh;
   padding: 50px 30px;
+  overflow: scroll;
 `;
 
 const Wrapper = styled.div`
@@ -49,23 +50,14 @@ const ResultsContainer = styled.div`
 
 
 const Watchlist = (props) => {
-    const [movie, setMovie] = useState({});
 
-    const handleClick = async (id) => {
-      const url = `http://www.omdbapi.com/?i=${id}&apikey=31e98962`;
-      const response = await fetch(url);
-      const responseJson = await response.json();
-      console.log(responseJson);
-      setMovie(responseJson);
-    };
-console.log("props movies", props.movies)
   return (
     <Container>
      
         <ResultsContainer>Watchlist</ResultsContainer>
         {props.movies.map((movie, index) => (
           <div key={index}>
-            <Wrapper onClick={() => handleClick(movie.imdbID)}>
+            <Wrapper>
               <ImgContainer>
                 <Image src={movie.Poster} />
               </ImgContainer>
