@@ -2,7 +2,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
 import { Slider } from "@mui/material";
 import Radio from "@mui/material/Radio";
-
 import RadioGroup from "@mui/material/RadioGroup";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";

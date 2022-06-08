@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile, laptop } from "../responsive";
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 const Container = styled.div`
   display: flex;
@@ -143,6 +144,25 @@ const RatingsContainer = styled.div`
   font-weight: 250;
 `;
 
+const Watchlist = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0px;
+  border: 1px solid grey;
+  cursor: pointer;
+  &:hover {
+    background-color: #cfcece;
+  }
+  width: 100px;
+`
+const WatchlistWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 200px;
+`
+
 const Movies = (props) => {
   const [movie, setMovie] = useState({});
 
@@ -179,6 +199,14 @@ const Movies = (props) => {
               <ImageRight src={movie.Poster} />
             </ImgContainerRight>
             <MovieDetailsWrapper>
+              <WatchlistWrapper>
+            <Watchlist>
+            <BookmarkBorderIcon 
+            style={{ color: "grey" }}
+            />
+            Watchlist
+          </Watchlist>
+          </WatchlistWrapper>
               <TitleRight>{movie.Title}</TitleRight>
               <MovieDetails>
                 <MovieRating>{movie.Rated}</MovieRating>
