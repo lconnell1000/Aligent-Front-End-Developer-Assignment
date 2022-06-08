@@ -15,7 +15,6 @@ const App = () => {
   const [searching, setSearching] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
 
- 
   const getMovieRequest = async (searchValue, radioValue) => {
     setSearching(true);
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=31e98962`;
@@ -39,7 +38,6 @@ const App = () => {
     filterMovies(allMovies);
     setSearching(false);
     //then filter the movies based on the year they were made
-  
   };
 
   const filterMovies = (moviesToFilter) => {
@@ -47,9 +45,9 @@ const App = () => {
       (element) => element.Year > yearValue[0] && element.Year < yearValue[1]
     );
 
-    if (radioValue !== 'Any') {
-      filteredMovies = filteredMovies.filter((element) =>
-        element.Type === radioValue
+    if (radioValue !== "Any") {
+      filteredMovies = filteredMovies.filter(
+        (element) => element.Type === radioValue
       );
     }
     const totalMovies = filteredMovies.length;
@@ -70,19 +68,35 @@ const App = () => {
   };
 
   //function for when the user changes any of the filters other than search
- 
+
   useEffect(() => {
     filterMovies(allMovies);
   }, [radioValue, yearValue]);
 
+  const saveToLocal = (items) => {
+    localStorage.setItem("react-movie-app-watchlist", JSON.stringify(items));
+  };
+
   const addWatchlistMovie = (movie) => {
-    console.log("TESTING", movie);
-    const newWatchlist = [...watchlist, movie]
+    const newWatchlist = [...watchlist, movie];
     setWatchlist(newWatchlist);
+    saveToLocal(newWatchlist);
+  };
+
+  const removeWatchlistMovie = (movie) => {
+    const newWatchlist = watchlist.filter(
+      (item) => item.imdbId !== movie.imdbId
+    );
+    setWatchlist(newWatchlist);
+    saveToLocal(newWatchlist);
   };
 
   return (
     <div>
+      <Watchlist
+        movies={watchlist}
+        removeWatchlistMovie={removeWatchlistMovie}
+      />
       <Navbar
         onSearch={onSearch}
         searchValue={searchValue}
@@ -99,9 +113,6 @@ const App = () => {
         setTotalResults={setTotalResults}
         movies={movies}
         addWatchlistMovie={addWatchlistMovie}
-      />
-      <Watchlist
-      movies = {watchlist}
       />
     </div>
   );

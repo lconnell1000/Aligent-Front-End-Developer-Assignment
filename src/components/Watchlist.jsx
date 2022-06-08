@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 200px;
   border-right: 0.5px solid grey;
   cursor: pointer;
   &:hover {
@@ -42,6 +43,8 @@ const ResultsContainer = styled.div`
   display: flex;
   height: 135 px;
   font-weight: 400;
+  font-size: 24px;
+  color: grey;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -54,10 +57,10 @@ const Watchlist = (props) => {
   return (
     <Container>
      
-        <ResultsContainer>Watchlist</ResultsContainer>
+        <ResultsContainer>Watchlist *click to delete</ResultsContainer>
         {props.movies.map((movie, index) => (
           <div key={index}>
-            <Wrapper>
+            <Wrapper onClick={() => props.removeWatchlistMovie(movie)}>
               <ImgContainer>
                 <Image src={movie.Poster} />
               </ImgContainer>
