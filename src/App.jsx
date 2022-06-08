@@ -84,19 +84,18 @@ const App = () => {
   };
 
   const removeWatchlistMovie = (movie) => {
+    console.log("watchlistlengt", watchlist.length);
+    console.log("movie.imdbId", movie);
     const newWatchlist = watchlist.filter(
-      (item) => item.imdbId !== movie.imdbId
+      (item) => item.imdbID !== movie.imdbID
     );
+    console.log("newWatchlist", newWatchlist);
     setWatchlist(newWatchlist);
     saveToLocal(newWatchlist);
   };
 
   return (
     <div>
-      <Watchlist
-        movies={watchlist}
-        removeWatchlistMovie={removeWatchlistMovie}
-      />
       <Navbar
         onSearch={onSearch}
         searchValue={searchValue}
@@ -107,6 +106,10 @@ const App = () => {
         setYearValue={setYearValue}
         searching={searching}
         setSearching={setSearching}
+      />
+      <Watchlist
+        movies={watchlist}
+        removeWatchlistMovie={removeWatchlistMovie}
       />
       <Movies
         totalResults={totalResults}

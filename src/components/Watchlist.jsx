@@ -1,12 +1,12 @@
-
+import ClearSharpIcon from "@mui/icons-material/ClearSharp";
 import styled from "styled-components";
-
 
 const Container = styled.div`
   display: flex;
-  height: 30vh;
+  height: 25vh;
   padding: 50px 30px;
   overflow: scroll;
+  border-bottom: 1px solid grey;
 `;
 
 const Wrapper = styled.div`
@@ -15,11 +15,12 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 200px;
-  border-right: 0.5px solid grey;
+
   cursor: pointer;
   &:hover {
     background-color: #cfcece;
   }
+  padding: 15px 15px;
 `;
 const ImgContainer = styled.div`
   height: 135px;
@@ -34,6 +35,8 @@ const Title = styled.h1`
 `;
 const InfoContainer = styled.div`
   flex: 1;
+  padding: 30px 10px;
+  border-right: 1px solid grey;
 `;
 const Year = styled.h3`
   font-size: 12px;
@@ -45,33 +48,33 @@ const ResultsContainer = styled.div`
   font-weight: 400;
   font-size: 24px;
   color: grey;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px 10px;
+  justify-content: center;
+  padding: 10px 5px;
 `;
 
-
 const Watchlist = (props) => {
-
   return (
     <Container>
-     
-        <ResultsContainer>Watchlist *click to delete</ResultsContainer>
-        {props.movies.map((movie, index) => (
-          <div key={index}>
-            <Wrapper onClick={() => props.removeWatchlistMovie(movie)}>
-              <ImgContainer>
-                <Image src={movie.Poster} />
-              </ImgContainer>
-              <InfoContainer>
-                <Title>{movie.Title}</Title>
-                <Year>{movie.Year}</Year>
-              </InfoContainer>
-            </Wrapper>
-          </div>
-        ))}
-     
+      <ResultsContainer>Watchlist:</ResultsContainer>
+      {props.movies.map((movie, index) => (
+        <div key={index}>
+          <Wrapper>
+            <ClearSharpIcon
+              onClick={() => props.removeWatchlistMovie(movie)}
+              style={{ color: "grey" }}
+            />
+            <ImgContainer>
+              <Image src={movie.Poster} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{movie.Title}</Title>
+              <Year>{movie.Year}</Year>
+            </InfoContainer>
+          </Wrapper>
+        </div>
+      ))}
     </Container>
   );
 };
