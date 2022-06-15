@@ -84,12 +84,9 @@ const App = () => {
   };
 
   const removeWatchlistMovie = (movie) => {
-    console.log("watchlistlengt", watchlist.length);
-    console.log("movie.imdbId", movie);
     const newWatchlist = watchlist.filter(
       (item) => item.imdbID !== movie.imdbID
     );
-    console.log("newWatchlist", newWatchlist);
     setWatchlist(newWatchlist);
     saveToLocal(newWatchlist);
   };

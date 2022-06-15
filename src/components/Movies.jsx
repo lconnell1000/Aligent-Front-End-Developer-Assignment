@@ -170,7 +170,6 @@ const Movies = (props) => {
     const url = `http://www.omdbapi.com/?i=${id}&apikey=31e98962`;
     const response = await fetch(url);
     const responseJson = await response.json();
-    //console.log(responseJson);
     setMovie(responseJson);
   };
 

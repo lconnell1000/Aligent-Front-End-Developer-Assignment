@@ -105,9 +105,6 @@ const Navbar = (props) => {
             <Backdrop
               className={classes.backdrop}
               open={props.searching}
-              onClick={() => {
-                alert("Backdrop clicked");
-              }}
             >
               <CircularProgress color="inherit" />
             </Backdrop>
