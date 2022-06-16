@@ -42,7 +42,7 @@ const App = () => {
 
   const filterMovies = (moviesToFilter) => {
     let filteredMovies = moviesToFilter.filter(
-      (element) => element.Year > yearValue[0] && element.Year < yearValue[1]
+      (element) => element.Year >= yearValue[0] && element.Year <= yearValue[1]
     );
 
     if (radioValue !== "Any") {
