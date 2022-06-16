@@ -15,7 +15,7 @@ const App = () => {
   const [searching, setSearching] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
 
-  const getMovieRequest = async (searchValue, radioValue) => {
+  const getMovieRequest = async (searchValue) => {
     setSearching(true);
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=31e98962`;
 
@@ -25,7 +25,7 @@ const App = () => {
     //figure out the total number of pages that the search has
     const pages = Math.ceil(responseJson.totalResults / 10);
     let allMovies = [];
-    //then create an allMovies array that contains the results form all pages
+    //then create an allMovies array that contains the results from all pages
     for (let i = 1; i <= pages; i++) {
       const responses = await fetch(
         `http://www.omdbapi.com/?s=${searchValue}&page=${i}&apikey=31e98962`
@@ -37,7 +37,7 @@ const App = () => {
     setAllMovies(allMovies);
     filterMovies(allMovies);
     setSearching(false);
-    //then filter the movies based on the year they were made
+    //then filter the movies based on the year they were made and the type
   };
 
   const filterMovies = (moviesToFilter) => {
