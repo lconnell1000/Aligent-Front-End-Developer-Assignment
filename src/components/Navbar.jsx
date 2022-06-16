@@ -124,7 +124,7 @@ const Navbar = (props) => {
               value={props.yearValue}
               onChange={handleChange}
               valueLabelDisplay="auto"
-              min={1950}
+              min={1930}
               max={2021}
               sx={{
                 width: 250,
